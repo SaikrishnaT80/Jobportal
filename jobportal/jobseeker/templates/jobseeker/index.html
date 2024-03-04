@@ -1,0 +1,40 @@
+{%extends 'jobseeker/base.html' %}
+{% load static %}
+{%block bodyblock %}
+<h2 class="mt-4"><b>Welcome {{request.user}} </b></h2>
+
+<h3>
+  <marquee  bgcolor="grey" behavior="text" direction="right">New job openings for you</marquee>
+</h3>
+{%for job in job%}
+
+<div class="card mb-3 my-4" style="max-width: 740px;">
+  <div class="row g-0">
+    <div class="col-md-4 d-flex justify-content-center align-items-center  ">
+      {%if job.poster%}
+      <img src="{{job.poster.url}}" class="img-fluid rounded-start" alt="...">
+      {%endif%}
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{job.title}}</h5>
+        <p class="card-text">A Junior Developer is an entry-level position in the field of software development. They
+          are typically new to the industry and are in the early stages of their career. A Junior Developer is tasked
+          with writing and testing code, maintaining software, and contributing to various development projects.</p>
+        <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+        <p class="card-text">
+          <i class="fa-regular fa-clock"></i> Full time
+          <i class="fa-solid fa-sack-dollar" style="color: #3f4040;"></i> {{job.salary}}
+          <i class="fa-solid fa-building" style="color: #818181;"></i>{{job.company_name}}
+
+        </p>
+        <a href="{% url 'apply' job.id %}" class="text-decoration-none btn btn-primary btn-sm">Apply now</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{%endfor%}
+
+
+{%endblock%}
